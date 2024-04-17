@@ -1,18 +1,83 @@
-#include <iostream>
 #include "Crawler.h"
 #include "Hopper.h"
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
+#include <iostream>
+#include <vector>
+#include <fstream>
+using namespace std;
 
-    Direction test = North;
+int main() {
+    cout << "Hello, World!" << endl;
+
+    // Direction test = North;
 
     Crawler crawler(100, 0, 0, North, 10);
     Hopper hopper(100, 9, 0, West, 10, 2);
 
+    vector<Bug*> bug_vector;
 
-    crawler.move();
-    hopper.move();
+    // bug_vector.push_back();
+
+    ifstream fin("bugs.txt");
+    if(fin) {
+        cout << "Accessing file..." << endl;
+        string line;
+        while(!fin.eof()) {
+            fin >> line;
+            cout << "Current Bug: " << line << endl;
+            string::size_type start_pos;
+            string::size_type end_pos = line.find(';');
+            string bug_type = line.substr(0, end_pos);
+
+            start_pos = end_pos + 1;
+            end_pos = line.find(';', start_pos);
+            int bug_id = stoi(line.substr(start_pos, end_pos - start_pos));
+
+            start_pos = end_pos + 1;
+            end_pos = line.find(';', start_pos);
+            int x = stoi(line.substr(start_pos, end_pos - start_pos));
+
+            start_pos = end_pos + 1;
+            end_pos = line.find(';', start_pos);
+            int y = stoi(line.substr(start_pos, end_pos - start_pos));
+
+            start_pos = end_pos + 1;
+            end_pos = line.find(';', start_pos);
+            Direction bug_direction;
+            switch(stoi(line.substr(start_pos, end_pos))) {
+                default: {bug_direction = North;}
+                case 2: {bug_direction = East;}
+                case 3: {bug_direction = South;}
+                case 4: {bug_direction = West;}
+            }
+
+            start_pos = end_pos + 1;
+            end_pos = line.find(';', start_pos);
+            int bug_size = stoi(line.substr(start_pos, end_pos - start_pos));
+            int bug_hop;
+            if(bug_type == "H") {
+                start_pos = end_pos + 1;
+                end_pos = line.find(';', start_pos);
+                bug_hop = stoi(line.substr(start_pos, end_pos - start_pos));
+            }
+            cout << bug_type << " "
+            << bug_id << " "
+            << x << " "
+            << y << " "
+            << bug_direction << " "
+            << bug_size << " " << endl;
+            if(bug_type == "H") {
+                cout << bug_hop << " " << endl;
+            }
+        }
+        fin.close();
+    } else {
+        cout << "Unable to open file" << endl;
+    }
+
+
+    // crawler.move();
+    // hopper.move();
 
     return 0;
 }

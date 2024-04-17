@@ -1,11 +1,10 @@
 //
 // Created by jrush_000 on 15/04/2024.
 //
-
 #ifndef HOPPER_H
 #define HOPPER_H
-#include "Bug.h"
 
+#include "Bug.h"
 
 class Hopper : public Bug {
 private:

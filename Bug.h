@@ -1,11 +1,12 @@
 //
 // Created by jrush_000 on 15/04/2024.
 //
-
 #ifndef BUG_H
 #define BUG_H
+
 #include <list>
 #include <utility>
+
 using namespace::std;
 enum Direction {North, East, South, West};
 
@@ -16,7 +17,7 @@ protected:
     Direction direction;
     int size;
     bool alive;
-    pmr::list<pair<int, int>> path;
+    list<pair<int, int>> path;
 public:
     virtual void move() =0;
     bool isWayBlocked();

@@ -8,7 +8,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Crawler.h"
 using namespace std;
 
 void Hopper::move() {
@@ -21,8 +20,8 @@ void Hopper::move() {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: { direction = East; }
-                        case 3: { direction = South; }
-                        case 4: { direction = West; }
+                        case 2: { direction = South; }
+                        case 3: { direction = West; }
                     }
                 } else {
                     if(position.second + hopLength > 9) {
@@ -36,8 +35,8 @@ void Hopper::move() {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: {direction = North;}
-                        case 3: {direction = South;}
-                        case 4: {direction = West;}
+                        case 2: {direction = South;}
+                        case 3: {direction = West;}
                     }
                 } else {
                     if(position.first + hopLength > 9) {
@@ -52,7 +51,7 @@ void Hopper::move() {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: {direction = North;}
                         case 2: {direction = East;}
-                        case 4: {direction = West;}
+                        case 3: {direction = West;}
                     }
                 } else {
                     if(position.second - hopLength < 0) {
@@ -82,4 +81,4 @@ void Hopper::move() {
     path.push_back(position);
 }
 
-Crawler::~Crawler() = default;
+Hopper::~Hopper() = default;

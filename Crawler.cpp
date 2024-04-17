@@ -19,8 +19,8 @@ void Crawler::move() {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: { direction = East; }
-                        case 3: { direction = South; }
-                        case 4: { direction = West; }
+                        case 2: { direction = South; }
+                        case 3: { direction = West; }
                     }
                 } else {
                     position.second++; // Move North
@@ -30,8 +30,8 @@ void Crawler::move() {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: {direction = North;}
-                        case 3: {direction = South;}
-                        case 4: {direction = West;}
+                        case 2: {direction = South;}
+                        case 3: {direction = West;}
                     }
                 } else {
                     position.first++;   // Move East
@@ -42,7 +42,7 @@ void Crawler::move() {
                     switch (rand() % 3 + 1) {   // Pick a random direction
                         default: {direction = North;}
                         case 2: {direction = East;}
-                        case 4: {direction = West;}
+                        case 3: {direction = West;}
                     }
                 } else {
                     position.second--;  // Move South

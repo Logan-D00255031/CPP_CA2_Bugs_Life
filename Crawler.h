@@ -1,9 +1,9 @@
 //
 // Created by jrush_000 on 15/04/2024.
 //
-
 #ifndef CRAWLER_H
 #define CRAWLER_H
+
 #include "Bug.h"
 
 class Crawler : public Bug {
