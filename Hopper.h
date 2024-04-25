@@ -23,6 +23,12 @@ public:
 
     void move() override;
 
+    void print() override;
+
+    string class_name() override {
+        return "Hopper";
+    }
+
     ~Hopper() override;
 };
 

@@ -5,6 +5,7 @@
 #define BUG_H
 
 #include <list>
+#include <iostream>
 #include <utility>
 
 using namespace::std;
@@ -20,9 +21,14 @@ protected:
     list<pair<int, int>> path;
 public:
     virtual void move() =0;
-    bool isWayBlocked();
+    bool isWayBlocked() const;
 
     virtual ~Bug();
+
+    virtual string class_name() =0;
+    virtual void print() =0;
+
+    bool isId(int id) const;
 };
 
 #endif //BUG_H

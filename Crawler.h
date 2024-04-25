@@ -4,6 +4,8 @@
 #ifndef CRAWLER_H
 #define CRAWLER_H
 
+#include <iostream>
+
 #include "Bug.h"
 
 class Crawler : public Bug {
@@ -19,6 +21,12 @@ public:
     }
 
     void move() override;
+
+    void print() override;
+
+    string class_name() override {
+        return "Crawler";
+    }
 
     ~Crawler() override;
 };

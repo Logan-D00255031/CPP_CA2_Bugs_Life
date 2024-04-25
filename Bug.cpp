@@ -4,7 +4,9 @@
 
 #include "Bug.h"
 
-bool Bug::isWayBlocked() {
+using namespace std;
+
+bool Bug::isWayBlocked() const {
     if(direction == North && position.second == 9) {
         return true;
     }
@@ -17,6 +19,11 @@ bool Bug::isWayBlocked() {
     if (direction == West && position.first == 0) {
         return true;
     }
+    return false;
+}
+
+bool Bug::isId(const int id) const {
+    if(this->id == id) { return true; }
     return false;
 }
 

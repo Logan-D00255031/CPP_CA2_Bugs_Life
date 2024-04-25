@@ -81,4 +81,31 @@ void Hopper::move() {
     path.push_back(position);
 }
 
+void Hopper::print() {
+    string str_direction;
+    string str_alive;
+    switch (direction) {
+        case North: {str_direction = "North";}
+        break;
+        case East: {str_direction = "East";}
+        break;
+        case South: {str_direction = "South";}
+        break;
+        case West: {str_direction = "West";}
+    }
+    if(alive) {
+        str_alive = "Alive";
+    } else {
+        str_alive = "Dead";
+    }
+    cout << id << " "
+    << class_name() << " ("
+    << position.first << ", "
+    << position.second << ") "
+    << size << " "
+    << str_direction << " "
+    << hopLength << " "
+    << str_alive << endl;
+}
+
 Hopper::~Hopper() = default;

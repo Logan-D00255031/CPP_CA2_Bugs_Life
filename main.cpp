@@ -24,7 +24,7 @@ int main() {
         string line;
         while(!fin.eof()) {
             fin >> line;
-            cout << "Current Bug: " << line << endl;
+            // cout << "Current Bug: " << line << endl;
             string::size_type start_pos;
             string::size_type end_pos = line.find(';');
             string bug_type = line.substr(0, end_pos);
@@ -46,8 +46,11 @@ int main() {
             Direction bug_direction;
             switch(stoi(line.substr(start_pos, end_pos))) {
                 default: {bug_direction = North;}
+                break;
                 case 2: {bug_direction = East;}
+                break;
                 case 3: {bug_direction = South;}
+                break;
                 case 4: {bug_direction = West;}
             }
 
@@ -60,14 +63,18 @@ int main() {
                 end_pos = line.find(';', start_pos);
                 bug_hop = stoi(line.substr(start_pos, end_pos - start_pos));
             }
-            cout << bug_type << " "
+            /* cout << bug_type << " "
             << bug_id << " "
             << x << " "
             << y << " "
-            << bug_direction << " "
+            << bug_direction + 1 << " "
             << bug_size << " " << endl;
+            */
             if(bug_type == "H") {
-                cout << bug_hop << " " << endl;
+                // cout << bug_hop << " " << endl;
+                bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));
+            } else {
+                bug_vector.push_back(new Crawler(bug_id, x, y, bug_direction, bug_size));
             }
         }
         fin.close();
@@ -75,6 +82,20 @@ int main() {
         cout << "Unable to open file" << endl;
     }
 
+    for(Bug* bug: bug_vector) {
+        bug->print();
+    }
+
+    cout << endl << "Search for a Bug id: " << endl;
+    int id;
+    cin >> id;
+
+    for (Bug* bug : bug_vector) {
+        if(bug->isId(id)) {
+            cout << "Bug Found!" << endl;
+            bug->print();
+        }
+    }
 
     // crawler.move();
     // hopper.move();
