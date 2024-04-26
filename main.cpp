@@ -4,16 +4,19 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+
+#include "Board.h"
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    // cout << "Hello, World!" << endl;
 
     // Direction test = North;
 
     Crawler crawler(100, 0, 0, North, 10);
     Hopper hopper(100, 9, 0, West, 10, 2);
 
+    /*
     vector<Bug*> bug_vector;
 
     // bug_vector.push_back();
@@ -69,7 +72,7 @@ int main() {
             << y << " "
             << bug_direction + 1 << " "
             << bug_size << " " << endl;
-            */
+
             if(bug_type == "H") {
                 // cout << bug_hop << " " << endl;
                 bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));
@@ -96,9 +99,20 @@ int main() {
             bug->print();
         }
     }
+    */
 
-    // crawler.move();
-    // hopper.move();
+    // vector<vector<list<Bug*>>> grid(10, vector<list<Bug*>>(10));
+    // grid[0][0];
+
+    Board board{};
+    board.initialise("bugs.txt");
+    board.displayBugs();
+
+    cout << endl << "Search for a Bug id: " << endl;
+    int id;
+    cin >> id;
+
+    board.findBug(id);
 
     return 0;
 }
