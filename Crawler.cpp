@@ -96,6 +96,5 @@ void Crawler::print() {
         << " " << str_alive << endl;
 }
 
-
 Crawler::~Crawler() = default;
 

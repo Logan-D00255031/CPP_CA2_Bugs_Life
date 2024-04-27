@@ -83,4 +83,6 @@ void Board::tap() {
     }
 }
 
-
+void Board::displayBugHistory() {
+    for(Bug* bug: bug_vector) { bug->printHistory(); } // Print each Bug's history from the vector
+}

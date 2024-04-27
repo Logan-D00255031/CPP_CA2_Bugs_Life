@@ -26,6 +26,7 @@ public:
     void displayBugs();
     void findBug(int id);
     void tap();
+    void displayBugHistory();
 
     ~Board() = default;
 };

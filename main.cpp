@@ -118,5 +118,9 @@ int main() {
 
     board.displayBugs();
 
+    cout << endl;
+
+    board.displayBugHistory();
+
     return 0;
 }

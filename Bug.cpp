@@ -31,5 +31,17 @@ bool Bug::isAlive() const {
     return this->alive;
 }
 
+void Bug::printHistory() {
+    cout << id << " " << class_name() << " Path:" << ends;
+    for (pair<int, int> pair : path) {
+        if (path.front() != pair) {
+            cout << ",";
+        }
+        cout << "(" << pair.first << "," << pair.second << ")";
+    }
+    if(alive) { cout << " Alive!" << endl; }
+    else { cout << " Eaten by " << endl;}    // Add the killer's id to this !!!
+}
+
 Bug::~Bug() = default;
 

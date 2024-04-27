@@ -27,10 +27,10 @@ public:
 
     virtual string class_name() =0;
     virtual void print() =0;
+    void printHistory();
 
     bool isId(int id) const;
     bool isAlive() const;
-    void printHistory() const;
 };
 
 #endif //BUG_H
