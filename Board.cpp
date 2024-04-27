@@ -74,4 +74,13 @@ void Board::findBug(const int id) {
     }
 }
 
+void Board::tap() {
+    for (Bug* bug : bug_vector) {
+        if(bug->isAlive()) {
+            cout << "Moving bug..." << endl;
+            bug->move();
+        }
+    }
+}
+
 

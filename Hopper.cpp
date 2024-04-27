@@ -19,9 +19,9 @@ void Hopper::move() {
             case North: {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: { direction = East; }
-                        case 2: { direction = South; }
-                        case 3: { direction = West; }
+                        default: { direction = East; } break;
+                        case 2: { direction = South; } break;
+                        case 3: { direction = West; } break;
                     }
                 } else {
                     if(position.second + hopLength > 9) {
@@ -34,9 +34,9 @@ void Hopper::move() {
             case East: {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = South;}
-                        case 3: {direction = West;}
+                        default: {direction = North;} break;
+                        case 2: {direction = South;} break;
+                        case 3: {direction = West;} break;
                     }
                 } else {
                     if(position.first + hopLength > 9) {
@@ -49,9 +49,9 @@ void Hopper::move() {
             case South: {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = East;}
-                        case 3: {direction = West;}
+                        default: {direction = North;} break;
+                        case 2: {direction = East;} break;
+                        case 3: {direction = West;} break;
                     }
                 } else {
                     if(position.second - hopLength < 0) {
@@ -64,9 +64,9 @@ void Hopper::move() {
             case West: {
                 if (isWayBlocked()) {
                     switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = East;}
-                        case 3: {direction = South;}
+                        default: {direction = North;} break;
+                        case 2: {direction = East;} break;
+                        case 3: {direction = South;} break;
                     }
                 } else {
                     if(position.first - hopLength < 0) {

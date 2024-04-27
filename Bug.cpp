@@ -27,5 +27,9 @@ bool Bug::isId(const int id) const {
     return false;
 }
 
+bool Bug::isAlive() const {
+    return this->alive;
+}
+
 Bug::~Bug() = default;
 

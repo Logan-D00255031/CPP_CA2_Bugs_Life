@@ -14,46 +14,52 @@ void Crawler::move() {
     const pair<int, int> current = position;    // log current position
 
     while (current == position) {   // Loop until Crawler has moved
+        int random = rand() % 3 + 1;
+        // cout << random << ends;
         switch (direction) {    // Check Crawler direction
             case North: {
+                // cout << ", North" << endl;
                 if (isWayBlocked()) {
-                    switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: { direction = East; }
-                        case 2: { direction = South; }
-                        case 3: { direction = West; }
+                    switch (random) {   // Pick a random direction
+                        default: { direction = East; } break;
+                        case 2: { direction = South; } break;
+                        case 3: { direction = West; } break;
                     }
                 } else {
                     position.second++; // Move North
                 }
             } break;
             case East: {
+                // cout << ", East" << endl;
                 if (isWayBlocked()) {
-                    switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = South;}
-                        case 3: {direction = West;}
+                    switch (random) {   // Pick a random direction
+                        default: {direction = North;} break;
+                        case 2: {direction = South;} break;
+                        case 3: {direction = West;} break;
                     }
                 } else {
                     position.first++;   // Move East
                 }
             } break;
             case South: {
+                // cout << ", South" << endl;
                 if (isWayBlocked()) {
-                    switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = East;}
-                        case 3: {direction = West;}
+                    switch (random) {   // Pick a random direction
+                        default: {direction = North;} break;
+                        case 2: {direction = East;} break;
+                        case 3: {direction = West;} break;
                     }
                 } else {
                     position.second--;  // Move South
                 }
             } break;
             case West: {
+                // cout << ", West" << endl;
                 if (isWayBlocked()) {
-                    switch (rand() % 3 + 1) {   // Pick a random direction
-                        default: {direction = North;}
-                        case 2: {direction = East;}
-                        case 3: {direction = South;}
+                    switch (random) {   // Pick a random direction
+                        default: {direction = North;} break;
+                        case 2: {direction = East;} break;
+                        case 3: {direction = South;} break;
                     }
                 } else {
                     position.first--;   // Move West

@@ -114,5 +114,9 @@ int main() {
 
     board.findBug(id);
 
+    board.tap();
+
+    board.displayBugs();
+
     return 0;
 }

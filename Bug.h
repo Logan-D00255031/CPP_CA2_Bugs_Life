@@ -29,6 +29,8 @@ public:
     virtual void print() =0;
 
     bool isId(int id) const;
+    bool isAlive() const;
+    void printHistory() const;
 };
 
 #endif //BUG_H
