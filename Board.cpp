@@ -10,26 +10,33 @@
 #include "Hopper.h"
 
 void Board::initialise(const string& file_name) {
+    if(!bug_vector.empty()) {   // If the bug vector contains any bugs already
+        for (Bug* bug : bug_vector) {   // Delete pointers
+            delete bug;
+        }
+        bug_vector.clear(); // Clear the vector
+    }
+
     ifstream fin(file_name);
     if(fin) {
         cout << "Accessing file..." << endl;
         string line;
         while(!fin.eof()) {
             getline(fin, line, ';');    // read until it reaches a ';'
-            string bug_type = line;
+            string bug_type = line; // store read value to bug_type
 
-            getline(fin, line, ';');
+            getline(fin, line, ';');    // read until it reaches a ';'
             const int bug_id = stoi(line);
 
-            getline(fin, line, ';');
-            const int x = stoi(line);
+            getline(fin, line, ';');    // read until it reaches a ';'
+            const int x = stoi(line);   // convert read value to int and store to x
 
-            getline(fin, line, ';');
-            const int y = stoi(line);
+            getline(fin, line, ';');    // read until it reaches a ';'
+            const int y = stoi(line);   // convert read value to int and store to y
 
-            getline(fin, line, ';');
+            getline(fin, line, ';');    // read until it reaches a ';'
             Direction bug_direction;
-            switch(stoi(line)) {
+            switch(stoi(line)) {    // convert int value to Direction
                 default: {bug_direction = North;}
                 break;
                 case 2: {bug_direction = East;}
@@ -39,18 +46,18 @@ void Board::initialise(const string& file_name) {
                 case 4: {bug_direction = West;}
             }
 
-            getline(fin, line, ';');
-            const int bug_size = stoi(line);
+            getline(fin, line, ';');    // read until it reaches a ';'
+            const int bug_size = stoi(line);    // convert read value to int and store to bug_size
 
-            getline(fin, line);
-            if(bug_type == "H") {
+            getline(fin, line); // read to end of the line
+            if(bug_type == "H") {   // if the bug is a Hopper
                 const int bug_hop = stoi(line);
-                bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));
-            } else {
-                bug_vector.push_back(new Crawler(bug_id, x, y, bug_direction, bug_size));
+                bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));   // push Hopper to vector
+            } else {    // Bug is a Crawler
+                bug_vector.push_back(new Crawler(bug_id, x, y, bug_direction, bug_size));   // push Crawler to vector
             }
         }
-        fin.close();
+        fin.close();    // Close the file
     } else {
         cout << "Unable to open file" << endl;
     }
@@ -67,6 +74,7 @@ void Board::findBug(const int id) {
             cout << "Bug Found!" << endl;
             bug->print();
             foundBug = true;
+            break;
         }
     }
     if (!foundBug) {
@@ -149,5 +157,10 @@ void Board::checkForFights() {
         }
     }
 }
+
+vector<Bug*>::size_type Board::aliveBugCount() const {
+    return bug_vector.size();
+}
+
 
 

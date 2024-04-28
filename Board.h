@@ -30,6 +30,7 @@ public:
     void writeBugHistory(const string& filename);
     void displayAllCells() const;
     void checkForFights();
+    vector<Bug*>::size_type aliveBugCount() const;
 
     ~Board() {
         for (Bug* bug : bug_vector) {

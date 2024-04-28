@@ -1,21 +1,17 @@
+#include <windows.h>
 #include "Crawler.h"
 #include "Hopper.h"
+#include "Board.h"
 
 #include <iostream>
 #include <vector>
 #include <fstream>
 
-#include "Board.h"
 using namespace std;
 
+void runSimulation(Board& board);
+
 int main() {
-    // cout << "Hello, World!" << endl;
-
-    // Direction test = North;
-
-    Crawler crawler(100, 0, 0, North, 10);
-    Hopper hopper(100, 9, 0, West, 10, 2);
-
     /*
     vector<Bug*> bug_vector;
 
@@ -101,11 +97,9 @@ int main() {
     }
     */
 
-    // vector<vector<list<Bug*>>> grid(10, vector<list<Bug*>>(10));
-    // grid[0][0];
-
     Board board{};
     board.initialise("bugs.txt");
+    // board.initialise("bugFightTest.txt");
     board.displayBugs();
 
     cout << endl << "Search for a Bug id: " << endl;
@@ -115,32 +109,27 @@ int main() {
     board.findBug(id);
 
     cout << endl;
-    board.tap();
-
-    cout << endl;
-    board.displayBugs();
-
-    cout << endl;
-
-    board.displayBugHistory();
-
-    cout << endl;
-    board.tap();
-
-    cout << endl;
-    board.displayBugHistory();
-
-    cout << endl;
-    board.tap();
-
-    cout << endl;
-    board.displayBugHistory();
-
-    cout << endl;
-    board.displayBugs();
-
-    cout << endl;
-    board.writeBugHistory("bugs_life_history_date_time.out");
+    runSimulation(board);
 
     return 0;
 }
+
+void runSimulation(Board &board) {
+    cout << "Running Simulation..." << endl;
+    int count = 1;
+    vector<Bug*>::size_type aliveBugs = board.aliveBugCount();  // Get amount of bugs alive
+    while (aliveBugs > 1 && count < 100) { // If more than one bug is still alive and less than 100 taps have been completed
+        cout << endl << "Tap " << count << ":" << endl << endl;
+        board.tap();    // Tap the bug board
+        cout << endl;
+        board.displayBugs();    // Show status of all bugs
+        aliveBugs = board.aliveBugCount();  // Check alive bugs remaining
+        Sleep(1000);    // Wait one second
+        count++;    // Increase the tap count
+    }
+    cout << endl;
+    board.displayBugHistory();  // Display bug history
+    cout << endl;
+    board.writeBugHistory("bugs_life_history_date_time.out");   // Write bug history
+}
+
