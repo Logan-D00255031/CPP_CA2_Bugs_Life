@@ -12,104 +12,69 @@ using namespace std;
 void runSimulation(Board& board);
 
 int main() {
-    /*
-    vector<Bug*> bug_vector;
 
-    // bug_vector.push_back();
-
-    ifstream fin("bugs.txt");
-    if(fin) {
-        cout << "Accessing file..." << endl;
-        string line;
-        while(!fin.eof()) {
-            fin >> line;
-            // cout << "Current Bug: " << line << endl;
-            string::size_type start_pos;
-            string::size_type end_pos = line.find(';');
-            string bug_type = line.substr(0, end_pos);
-
-            start_pos = end_pos + 1;
-            end_pos = line.find(';', start_pos);
-            int bug_id = stoi(line.substr(start_pos, end_pos - start_pos));
-
-            start_pos = end_pos + 1;
-            end_pos = line.find(';', start_pos);
-            int x = stoi(line.substr(start_pos, end_pos - start_pos));
-
-            start_pos = end_pos + 1;
-            end_pos = line.find(';', start_pos);
-            int y = stoi(line.substr(start_pos, end_pos - start_pos));
-
-            start_pos = end_pos + 1;
-            end_pos = line.find(';', start_pos);
-            Direction bug_direction;
-            switch(stoi(line.substr(start_pos, end_pos))) {
-                default: {bug_direction = North;}
-                break;
-                case 2: {bug_direction = East;}
-                break;
-                case 3: {bug_direction = South;}
-                break;
-                case 4: {bug_direction = West;}
-            }
-
-            start_pos = end_pos + 1;
-            end_pos = line.find(';', start_pos);
-            int bug_size = stoi(line.substr(start_pos, end_pos - start_pos));
-            int bug_hop;
-            if(bug_type == "H") {
-                start_pos = end_pos + 1;
-                end_pos = line.find(';', start_pos);
-                bug_hop = stoi(line.substr(start_pos, end_pos - start_pos));
-            }
-            /* cout << bug_type << " "
-            << bug_id << " "
-            << x << " "
-            << y << " "
-            << bug_direction + 1 << " "
-            << bug_size << " " << endl;
-
-            if(bug_type == "H") {
-                // cout << bug_hop << " " << endl;
-                bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));
-            } else {
-                bug_vector.push_back(new Crawler(bug_id, x, y, bug_direction, bug_size));
-            }
-        }
-        fin.close();
-    } else {
-        cout << "Unable to open file" << endl;
-    }
-
-    for(Bug* bug: bug_vector) {
-        bug->print();
-    }
-
-    cout << endl << "Search for a Bug id: " << endl;
-    int id;
-    cin >> id;
-
-    for (Bug* bug : bug_vector) {
-        if(bug->isId(id)) {
-            cout << "Bug Found!" << endl;
-            bug->print();
-        }
-    }
-    */
-
+    bool run = true;
     Board board{};
-    board.initialise("bugs.txt");
-    // board.initialise("bugFightTest.txt");
-    board.displayBugs();
 
-    cout << endl << "Search for a Bug id: " << endl;
-    int id;
-    cin >> id;
-
-    board.findBug(id);
-
-    cout << endl;
-    runSimulation(board);
+    while (run) {
+        cout << "1. Initialize Bug Board (load data from file)" << endl
+        << "2. Display all Bugs" << endl
+        << "3. Find a Bug (given an id)" << endl
+        << "4. Tap the Bug Board (causes move all, then fight/eat)" << endl
+        << "5. Display Life History of all Bugs (path taken)" << endl
+        << "6. Display all Cells listing their Bugs" << endl
+        << "7. Run simulation (generates a Tap every second)" << endl
+        << "8. Exit (write Life History of all Bugs to file)" << endl
+        << "Select a menu item: " << ends;
+        int menuItem;
+        cin >> menuItem;
+        switch (menuItem) {
+            default: { cout << "Invalid Command."; }
+            break;
+            case 1: {
+                string filename;
+                cout << "File Name: " << ends;
+                cin >> filename;
+                board.initialise(filename);
+            }
+            break;
+            case 2: {
+                cout << endl;
+                board.displayBugs();
+            }
+            break;
+            case 3: {
+                cout << endl << "Enter the Bug id: " << ends;
+                int id;
+                cin >> id;
+                cout << endl;
+                board.findBug(id);
+            }
+            break;
+            case 4: { board.tap(); }
+            break;
+            case 5: {
+                cout << endl;
+                board.displayBugHistory();
+            }
+            break;
+            case 6: {
+                cout << endl;
+                board.displayAllCells();
+            }
+            break;
+            case 7: { runSimulation(board); }
+            break;
+            case 8: {
+                cout << "Writing Bug history to file..." << endl;
+                board.writeBugHistory("bugs_life_history_date_time.out");
+                cout << "Goodbye!" << endl;
+                run = false;
+            }
+            break;
+        }
+        cout << endl;
+    }
 
     return 0;
 }
@@ -129,6 +94,7 @@ void runSimulation(Board &board) {
     }
     cout << endl;
     board.displayBugHistory();  // Display bug history
+    // cout << endl << aliveBugs << endl;
     cout << endl;
     board.writeBugHistory("bugs_life_history_date_time.out");   // Write bug history
 }

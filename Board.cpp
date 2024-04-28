@@ -11,9 +11,6 @@
 
 void Board::initialise(const string& file_name) {
     if(!bug_vector.empty()) {   // If the bug vector contains any bugs already
-        for (Bug* bug : bug_vector) {   // Delete pointers
-            delete bug;
-        }
         bug_vector.clear(); // Clear the vector
     }
 
@@ -162,7 +159,13 @@ void Board::checkForFights() {
 }
 
 vector<Bug*>::size_type Board::aliveBugCount() const {
-    return bug_vector.size();
+    int aliveBugCount = 0;
+    for (const Bug* bug : bug_vector) {
+        if (bug->isAlive()) {
+            aliveBugCount++;
+        }
+    }
+    return aliveBugCount;
 }
 
 
