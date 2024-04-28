@@ -28,6 +28,7 @@ public:
     void tap();
     void displayBugHistory();
     void writeBugHistory(const string& filename);
+    void displayAllCells() const;
 
     ~Board() = default;
 };

@@ -78,7 +78,9 @@ void Board::tap() {
     for (Bug* bug : bug_vector) {
         if(bug->isAlive()) {
             cout << "Moving bug..." << endl;
+            grid[bug->getPosition().first][bug->getPosition().second].remove(bug);   // Remove bug's current position on the grid
             bug->move();
+            grid[bug->getPosition().first][bug->getPosition().second].push_back(bug);   // Add bug's new position to the grid
         }
     }
 }
@@ -96,6 +98,26 @@ void Board::writeBugHistory(const string &filename) {
         cout << "Bug history written to file " << filename << endl;
     } else {
         cout << "Failed to write to file." << endl;
+    }
+}
+
+void Board::displayAllCells() const{
+    for (int i = 0; i < grid.size(); i++) {
+        for (int j = 0; j < grid[i].size(); j++) {
+            const list<Bug*>& bugList = grid[i][j];
+            cout << "(" << i << "," << j << "): ";
+            if(bugList.empty()) {   // If there are no bugs
+                cout << "empty" << endl;
+            } else {
+                for (Bug* bug : bugList) {  // Go through all bug in the list
+                    if(bugList.front() != bug) {
+                        cout << ", ";    // Display comma after first Bug
+                    }
+                    cout << bug->class_name() << " " << bug->getId();   // Display the bug's name and class
+                }
+                cout << endl;
+            }
+        }
     }
 }
 

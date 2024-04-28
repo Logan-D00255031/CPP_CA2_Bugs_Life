@@ -64,5 +64,10 @@ void Bug::writeHistoryToFile(ofstream& fout) {
     }
 }
 
+const pair<int, int>& Bug::getPosition() const {
+    return position;
+}
+
+
 Bug::~Bug() = default;
 

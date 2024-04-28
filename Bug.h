@@ -31,6 +31,7 @@ public:
     void printHistory();
     void writeHistoryToFile(ofstream& fout);
     const int& getId() const;
+    const pair<int, int>& getPosition() const;
     bool isId(int id) const;
     bool isAlive() const;
 };
