@@ -3,11 +3,11 @@
 //
 
 #include "Board.h"
-
-#include <fstream>
-
 #include "Crawler.h"
 #include "Hopper.h"
+#include "Skitterer.h"
+
+#include <fstream>
 
 void Board::initialise(const string& file_name) {
     if(!bug_vector.empty()) {   // If the bug vector contains any bugs already
@@ -53,6 +53,9 @@ void Board::initialise(const string& file_name) {
             if(bug_type == "H") {   // if the bug is a Hopper
                 const int bug_hop = stoi(line);
                 bug_vector.push_back(new Hopper(bug_id, x, y, bug_direction, bug_size, bug_hop));   // push Hopper to vector
+            } else if (bug_type == "S") {    // if the bug is a Skitterer
+                const int bug_step = stoi(line);
+                bug_vector.push_back(new Skitterer(bug_id, x, y, bug_direction, bug_size, bug_step));   // push Skitterer to vector
             } else {    // Bug is a Crawler
                 bug_vector.push_back(new Crawler(bug_id, x, y, bug_direction, bug_size));   // push Crawler to vector
             }
