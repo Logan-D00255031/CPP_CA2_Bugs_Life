@@ -79,7 +79,7 @@ void Bug::fightBug(Bug* bug) {
             bug->eatenByBug(this->id);
         } else if (this->size == bug->size) {   // If both bugs are the same size
             srand(time(nullptr));
-            switch (rand() % 2 + 1) {
+            switch (rand() % 2 + 1) {   // 50/50 chance on which bug wins
                 default: {
                     this->eat(bug->size);
                     bug->eatenByBug(this->id);

@@ -12,4 +12,6 @@ add_executable(CA2 main.cpp
         Hopper.cpp
         Board.cpp
         Board.h
+        Skitterer.cpp
+        Skitterer.h
 )
