@@ -29,8 +29,13 @@ public:
     void displayBugHistory();
     void writeBugHistory(const string& filename);
     void displayAllCells() const;
+    void checkForFights();
 
-    ~Board() = default;
+    ~Board() {
+        for (Bug* bug : bug_vector) {
+            delete bug;
+        }
+    }
 };
 
 

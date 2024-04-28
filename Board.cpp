@@ -75,14 +75,21 @@ void Board::findBug(const int id) {
 }
 
 void Board::tap() {
+    cout << "Moving bugs..." << endl;
     for (Bug* bug : bug_vector) {
-        if(bug->isAlive()) {
-            cout << "Moving bug..." << endl;
+        if(bug->isAlive()) {    // If the bug is alive
+            // cout << "Moving bug..." << endl;
             grid[bug->getPosition().first][bug->getPosition().second].remove(bug);   // Remove bug's current position on the grid
-            bug->move();
+            bug->move();    // Move the bug
             grid[bug->getPosition().first][bug->getPosition().second].push_back(bug);   // Add bug's new position to the grid
         }
     }
+    cout << endl << "Before fights:" << endl;
+    displayAllCells();
+    cout << endl;
+    checkForFights();   // Fight check
+    // cout << endl << "After fights:" << endl;
+    // displayAllCells();
 }
 
 void Board::displayBugHistory() {
@@ -109,7 +116,7 @@ void Board::displayAllCells() const{
             if(bugList.empty()) {   // If there are no bugs
                 cout << "empty" << endl;
             } else {
-                for (Bug* bug : bugList) {  // Go through all bug in the list
+                for (Bug* bug : bugList) {  // Go through all bugs in the list
                     if(bugList.front() != bug) {
                         cout << ", ";    // Display comma after first Bug
                     }
@@ -120,4 +127,27 @@ void Board::displayAllCells() const{
         }
     }
 }
+
+void Board::checkForFights() {
+    for (vector<list<Bug*>>& gridX : grid) {
+        for (list<Bug*>& bugList : gridX) {
+            while (bugList.size() > 1) {    // Loop until only one bug is left in the cell
+                // Get and remove the first two bugs from the list
+                Bug* bug1 = bugList.front();
+                bugList.pop_front();
+                Bug* bug2 = bugList.front();
+                bugList.pop_front();
+
+                bug1->fightBug(bug2);   // Get bugs to fight
+
+                if (bug1->isAlive()) {  // If bug1 is alive
+                    bugList.push_front(bug1);   // Push bug1 back to front of list
+                } else {    // bug2 is alive
+                    bugList.push_front(bug2);   // Push bug2 back to front of list
+                }
+            }
+        }
+    }
+}
+
 

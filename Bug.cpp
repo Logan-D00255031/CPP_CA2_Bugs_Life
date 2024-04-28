@@ -5,6 +5,8 @@
 #include "Bug.h"
 
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -68,6 +70,40 @@ const pair<int, int>& Bug::getPosition() const {
     return position;
 }
 
+void Bug::fightBug(Bug* bug) {
+    if (this->isAlive() && bug->isAlive()) {    // If both bugs are alive
+        cout << this->class_name() << " " << this->getId() << " and "
+        << bug->class_name() << " " << bug->getId() << " are about to fight..." << endl;
+        if(this->size > bug->size) {    // If this bug is larger
+            this->eat(bug->size);
+            bug->eatenByBug(this->id);
+        } else if (this->size == bug->size) {   // If both bugs are the same size
+            srand(time(nullptr));
+            switch (rand() % 2 + 1) {
+                default: {
+                    this->eat(bug->size);
+                    bug->eatenByBug(this->id);
+                } break;
+                case 2: {
+                    bug->eat(this->size);
+                    this->eatenByBug(bug->id);
+                } break;
+            }
+        } else {    // If the other bug is larger
+            bug->eat(this->size);
+            this->eatenByBug(bug->id);
+        }
+    }
+}
+
+void Bug::eat(const int size) {
+    this->size += size; // Increase size by value
+}
+
+void Bug::eatenByBug(const int id) {
+    this->killerId = id;    // Set the killer id by the value
+    this->alive = false;    // Set bug to "Dead"
+}
 
 Bug::~Bug() = default;
 

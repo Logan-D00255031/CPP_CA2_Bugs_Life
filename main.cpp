@@ -125,10 +125,22 @@ int main() {
     board.displayBugHistory();
 
     cout << endl;
-    board.writeBugHistory("bugs_life_history_date_time.out");
+    board.tap();
 
     cout << endl;
-    board.displayAllCells();
+    board.displayBugHistory();
+
+    cout << endl;
+    board.tap();
+
+    cout << endl;
+    board.displayBugHistory();
+
+    cout << endl;
+    board.displayBugs();
+
+    cout << endl;
+    board.writeBugHistory("bugs_life_history_date_time.out");
 
     return 0;
 }

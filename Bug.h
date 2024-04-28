@@ -30,6 +30,10 @@ public:
     virtual void print() =0;
     void printHistory();
     void writeHistoryToFile(ofstream& fout);
+    void fightBug(Bug* bug);
+    void eat(int size);
+    void eatenByBug(int id);
+
     const int& getId() const;
     const pair<int, int>& getPosition() const;
     bool isId(int id) const;
