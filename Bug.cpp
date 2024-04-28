@@ -4,6 +4,8 @@
 
 #include "Bug.h"
 
+#include <fstream>
+
 using namespace std;
 
 bool Bug::isWayBlocked() const {
@@ -32,15 +34,34 @@ bool Bug::isAlive() const {
 }
 
 void Bug::printHistory() {
-    cout << id << " " << class_name() << " Path:" << ends;
+    cout << id << " " << class_name() << " Path: ";  // Display id, bug type, and begin path history
     for (pair<int, int> pair : path) {
         if (path.front() != pair) {
-            cout << ",";
+            cout << ",";    // Add comma after first position
         }
-        cout << "(" << pair.first << "," << pair.second << ")";
+        cout << "(" << pair.first << "," << pair.second << ")";     // Display x and y of position
     }
+    // Display life status
     if(alive) { cout << " Alive!" << endl; }
-    else { cout << " Eaten by " << endl;}    // Add the killer's id to this !!!
+    else { cout << " Eaten by " << killerId << endl;}   // Give the id of the bug that ate it if dead
+}
+
+const int& Bug::getId() const {
+    return id;
+}
+
+void Bug::writeHistoryToFile(ofstream& fout) {
+    if (fout) {
+        fout << id << " " << class_name() << " Path: ";
+        for (pair<int, int> pair : path) {
+            if (path.front() != pair) {
+                fout << ",";
+            }
+            fout << "(" << pair.first << "," << pair.second << ")";
+        }
+        if(alive) { fout << " Alive!" << endl; }
+        else { fout << " Eaten by " << killerId << endl;}
+    }
 }
 
 Bug::~Bug() = default;

@@ -19,6 +19,7 @@ protected:
     int size;
     bool alive;
     list<pair<int, int>> path;
+    int killerId;
 public:
     virtual void move() =0;
     bool isWayBlocked() const;
@@ -28,7 +29,8 @@ public:
     virtual string class_name() =0;
     virtual void print() =0;
     void printHistory();
-
+    void writeHistoryToFile(ofstream& fout);
+    const int& getId() const;
     bool isId(int id) const;
     bool isAlive() const;
 };

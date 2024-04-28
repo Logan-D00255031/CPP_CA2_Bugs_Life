@@ -84,5 +84,18 @@ void Board::tap() {
 }
 
 void Board::displayBugHistory() {
-    for(Bug* bug: bug_vector) { bug->printHistory(); } // Print each Bug's history from the vector
+    for (Bug* bug : bug_vector) { bug->printHistory(); } // Print each Bug's history from the vector
 }
+
+void Board::writeBugHistory(const string &filename) {
+    ofstream fout(filename);
+    if (fout) {
+        for (Bug* bug : bug_vector) {   // Write each bug's history to file
+            bug->writeHistoryToFile(fout);
+        }
+        cout << "Bug history written to file " << filename << endl;
+    } else {
+        cout << "Failed to write to file." << endl;
+    }
+}
+
