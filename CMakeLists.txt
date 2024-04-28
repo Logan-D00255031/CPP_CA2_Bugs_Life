@@ -15,3 +15,11 @@ add_executable(CA2 main.cpp
         Skitterer.cpp
         Skitterer.h
 )
+
+# set(SFML_STATIC_LIBRARIES TRUE)
+# set(SFML_DIR E:/Program Files/SFML/SFML-2.6.1/lib/cmake/SFML)
+
+# find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
+
+# include_directories(E:/Program Files/SFML/SFML-2.6.1/include)
+# target_link_libraries(CA2 sfml-system sfml-window sfml-graphics sfml-audio)

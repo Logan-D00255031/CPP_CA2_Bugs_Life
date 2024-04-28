@@ -1,4 +1,5 @@
 #include <windows.h>
+// #include <SFML/Graphics.hpp>
 #include "Crawler.h"
 #include "Hopper.h"
 #include "Board.h"
@@ -10,6 +11,7 @@
 using namespace std;
 
 void runSimulation(Board& board);
+void startSFML(Board& board);
 
 int main() {
 
@@ -25,6 +27,7 @@ int main() {
         << "6. Display all Cells listing their Bugs" << endl
         << "7. Run simulation (generates a Tap every second)" << endl
         << "8. Exit (write Life History of all Bugs to file)" << endl
+        << "9. Start SFML Window" << endl
         << "Select a menu item: " << ends;
         int menuItem;
         cin >> menuItem;
@@ -72,6 +75,8 @@ int main() {
                 run = false;
             }
             break;
+            case 9: {startSFML(board);}
+            break;
         }
         cout << endl;
     }
@@ -98,4 +103,9 @@ void runSimulation(Board &board) {
     cout << endl;
     board.writeBugHistory("bugs_life_history_date_time.out");   // Write bug history
 }
+
+void startSFML(Board &board) {
+
+}
+
 
